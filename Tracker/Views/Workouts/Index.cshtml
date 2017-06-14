@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Tracker.Models.TrackerModels.Workout>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Workouts</h2>
+
+<div align ="right">
+<form asp-controller="Workouts" asp-action="Index">
+    <p>
+
+
+        @using (Html.BeginForm("Index", "Workouts", FormMethod.Get))
+        {
+        <p>
+            Search: @Html.TextBox("searchString")
+
+            <input type="submit" value="Search" />
+        </p>
+        }
+        </p>
+    </form>
+    </div>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.Label("Exercise Name")
+        </th>
+        <th>
+            @Html.Label("Weight Lifted")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Repetition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Set)
+        </th>
+        <th>
+            @Html.Label("Workout Date")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExerciseName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightLifted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Repetition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Set)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkoutDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.WorkoutID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.WorkoutID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.WorkoutID })
+        </td>
+    </tr>
+}
+
+</table>
+<p>
+    @Html.ActionLink("Add New Workout", "Create")
+</p>
