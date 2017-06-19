@@ -25,13 +25,13 @@ namespace Tracker.Controllers.TrackerController
             if (!String.IsNullOrEmpty(searchString))
             {
                 exercises = exercises.Where(x => x.ExerciseName.Contains(searchString));
-                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 10));
+                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 20));
             }
            
 
             else
             {
-                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate).ToList().ToPagedList(pageNumber ?? 1,10));
+                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate).ToList().ToPagedList(pageNumber ?? 1,20));
             }
         }
 
@@ -61,7 +61,7 @@ namespace Tracker.Controllers.TrackerController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate, Duration")] Workout workout)
+        public ActionResult Create([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +93,7 @@ namespace Tracker.Controllers.TrackerController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate, Duration")] Workout workout)
+        public ActionResult Edit([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
         {
             if (ModelState.IsValid)
             {

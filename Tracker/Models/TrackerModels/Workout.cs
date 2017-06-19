@@ -26,6 +26,8 @@ namespace Tracker.Models.TrackerModels
 
         public DateTimeKind Duration { get; set; }
 
+        public int ExerciseID { get; set; }
+
         public ICollection<Exercise> Exercises { get; set; }
 
 
