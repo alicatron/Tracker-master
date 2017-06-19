@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Edit Workout</h2>
 
 
 @using (Html.BeginForm())
@@ -12,7 +12,6 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Workout</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.WorkoutID)
@@ -66,7 +65,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.WorkoutID }) |
+    @Html.ActionLink("Back to Workout List", "Index")
 </div>
 
 @section Scripts {

@@ -4,14 +4,13 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+<h2>Workout Details</h2>
 
 <div>
-    <h4>Workout</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ExerciseName)
+            @Html.Label("Exercise Name")
         </dt>
 
         <dd>
@@ -19,7 +18,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WeightLifted)
+            @Html.Label("Weight Lifted")
         </dt>
 
         <dd>
@@ -43,7 +42,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WorkoutDate)
+            @Html.Label("Workout Date")
         </dt>
 
         <dd>
@@ -54,5 +53,7 @@
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.WorkoutID }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Delete", "Delete", new { id = Model.WorkoutID }) |
+    
+    @Html.ActionLink("Back to Workout List", "Index")
 </p>

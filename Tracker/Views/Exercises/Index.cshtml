@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<Tracker.Models.TrackerModels.Exercise>
 
+
 @{
     ViewBag.Title = "Index";
 }
@@ -25,17 +26,23 @@
 </div>
 
 <table class="table-responsive">
+    <table class="table table-bordered table-hover">
     <tr>
         <th>
             @Html.Label("Exercise Name")
         </th>
         <th>
-            @Html.Label("Body Part")
+            @Html.Label("Muscles Worked Out")
         </th>
         <th></th>
     </tr>
-
-@foreach (var item in Model) {
+@if (Model.Count() == 0)
+{
+        <tr><td colspan="3"> Records Not Found. Please Return to @Html.ActionLink("Exercise List", "Index")</td></tr>}
+else
+{
+    foreach (var item in Model)
+    {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.ExerciseName)
@@ -44,15 +51,19 @@
             @Html.DisplayFor(modelItem => item.bodyPart)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ExerciseID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ExerciseID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ExerciseID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ExerciseID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ExerciseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ExerciseID })
         </td>
     </tr>
+    }
 }
-
+        
 </table>
+    </table>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div align="center">
+    @Html.ActionLink("Add New Exercise", "Create") |
+
+    @Html.ActionLink("Add A Workout", "Create", "Workouts")
+<div/>

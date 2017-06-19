@@ -30,7 +30,7 @@ namespace Tracker.Controllers.TrackerController
 
             else
             {
-                return View(db.Workouts.ToList());
+                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate));
             }
         }
 

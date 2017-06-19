@@ -7,13 +7,13 @@ namespace Tracker.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addfullname : IMigrationMetadata
+    public sealed partial class error : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addfullname));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(error));
         
         string IMigrationMetadata.Id
         {
-            get { return "201706141624597_addfullname"; }
+            get { return "201706190812475_error"; }
         }
         
         string IMigrationMetadata.Source

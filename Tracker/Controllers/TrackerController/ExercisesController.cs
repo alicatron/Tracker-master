@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tracker.Models;
 using Tracker.Models.TrackerModels;
+using PagedList;
 
 namespace Tracker.Controllers.TrackerController
 {
@@ -77,7 +78,12 @@ namespace Tracker.Controllers.TrackerController
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ExerciseID,ExerciseName,bodyPart")] Exercise exercise)
         {
-            if (ModelState.IsValid)
+            if (db.Exercises.Any(x => x.ExerciseName == exercise.ExerciseName)) //if the exercise name already exist, user cannot enter details, error displayed
+            {
+                ModelState.AddModelError("Exercise", "Exercise already exists, please enter a different exercise");
+            }
+
+            else if (ModelState.IsValid)
             {
                 db.Exercises.Add(exercise);
                 db.SaveChanges();
