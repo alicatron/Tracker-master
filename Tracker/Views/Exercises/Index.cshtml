@@ -1,5 +1,8 @@
-﻿@model IEnumerable<Tracker.Models.TrackerModels.Exercise>
+﻿@using PagedList;
 
+@using PagedList.Mvc;
+
+@model IPagedList<Tracker.Models.TrackerModels.Exercise>
 
 @{
     ViewBag.Title = "Index";
@@ -67,3 +70,5 @@ else
 
     @Html.ActionLink("Add A Workout", "Create", "Workouts")
 <div/>
+
+@Html.PagedListPager(Model, pageNumer => Url.Action("Index", new { pageNumer }))

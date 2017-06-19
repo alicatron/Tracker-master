@@ -17,7 +17,7 @@ namespace Tracker.Controllers.TrackerController
         private TrackerContext db = new TrackerContext();
 
         // GET: Exercises
-        public ActionResult Index(string searchString, string option)
+        public ActionResult Index(string searchString, string option, int? pageNumber)
         {
             var exercises = from e in db.Exercises
                             select e;
@@ -25,7 +25,7 @@ namespace Tracker.Controllers.TrackerController
             if (!String.IsNullOrEmpty(searchString) & option == "ExerciseName")
             {
                 exercises = exercises.Where(x => x.ExerciseName.Contains(searchString));
-                return View(exercises);
+                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 10));
             }
             else if (!String.IsNullOrEmpty(searchString) & option == "BodyPart")
             {
@@ -34,7 +34,7 @@ namespace Tracker.Controllers.TrackerController
                     BodyPart bodyValue = (BodyPart)Enum.Parse(typeof(BodyPart), searchString);
                     if (Enum.IsDefined(typeof(BodyPart), bodyValue) | bodyValue.ToString().Contains(","))
                         exercises = exercises.Where(x => x.bodyPart.ToString().ToUpper() == bodyValue.ToString().ToUpper());
-                    return View(exercises.OrderBy(x => x.ExerciseName));
+                    return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1,10));
                 }
                 catch (ArgumentException)
                 {
@@ -46,7 +46,7 @@ namespace Tracker.Controllers.TrackerController
 
             else
             {
-                return View(db.Exercises.OrderBy(x => x.bodyPart).ToList());
+                return View(db.Exercises.OrderBy(x => x.bodyPart).ToList().ToPagedList(pageNumber ?? 1,10));
             }
         }
 

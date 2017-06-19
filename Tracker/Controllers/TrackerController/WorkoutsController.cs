@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Tracker.Models;
 using Tracker.Models.TrackerModels;
+using PagedList;
 
 namespace Tracker.Controllers.TrackerController
 {
@@ -16,7 +17,7 @@ namespace Tracker.Controllers.TrackerController
         private TrackerContext db = new TrackerContext();
 
         // GET: Workouts
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString, int? pageNumber)
         {
             var exercises = from x in db.Workouts
                             select x;
@@ -24,13 +25,13 @@ namespace Tracker.Controllers.TrackerController
             if (!String.IsNullOrEmpty(searchString))
             {
                 exercises = exercises.Where(x => x.ExerciseName.Contains(searchString));
-                return View(exercises);
+                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 10));
             }
            
 
             else
             {
-                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate));
+                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate).ToList().ToPagedList(pageNumber ?? 1,10));
             }
         }
 

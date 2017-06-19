@@ -1,4 +1,7 @@
-﻿@model IEnumerable<Tracker.Models.TrackerModels.Workout>
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<Tracker.Models.TrackerModels.Workout>
 
 @{
     ViewBag.Title = "Index";
@@ -34,10 +37,10 @@
                 @Html.Label("Weight Lifted")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Repetition)
+                @Html.Label("Repetition")
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Set)
+                @Html.Label("Set")
             </th>
             <th>
                 @Html.Label("Workout Date")
@@ -86,3 +89,5 @@ else
     @Html.ActionLink("Add New Exercise", "Create", "Exercises") |
     @Html.ActionLink("View All Workouts", "Index")
      </div>
+
+@Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { pageNumber}))
