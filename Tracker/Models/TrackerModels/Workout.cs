@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using Tracker.Models;
 
 namespace Tracker.Models.TrackerModels
 {
@@ -23,6 +24,10 @@ namespace Tracker.Models.TrackerModels
         [DataType(DataType.Date)]
         public DateTime WorkoutDate { get; set; }
 
+        public DateTimeKind Duration { get; set; }
+
         public ICollection<Exercise> Exercises { get; set; }
+
+
     }
 }

@@ -202,6 +202,14 @@
     <Compile Include="Migrations\201706190812475_error.Designer.cs">
       <DependentUpon>201706190812475_error.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706191224350_role.cs" />
+    <Compile Include="Migrations\201706191224350_role.Designer.cs">
+      <DependentUpon>201706191224350_role.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706191257046_duration.cs" />
+    <Compile Include="Migrations\201706191257046_duration.Designer.cs">
+      <DependentUpon>201706191257046_duration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -309,6 +317,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706190812475_error.resx">
       <DependentUpon>201706190812475_error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191224350_role.resx">
+      <DependentUpon>201706191224350_role.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706191257046_duration.resx">
+      <DependentUpon>201706191257046_duration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
