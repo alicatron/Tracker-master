@@ -14,7 +14,7 @@ namespace Tracker.Controllers.TrackerController
 {
     public class WorkoutsController : Controller
     {
-        private TrackerContext db = new TrackerContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Workouts
         public ActionResult Index(string searchString, int? pageNumber)
@@ -24,14 +24,15 @@ namespace Tracker.Controllers.TrackerController
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                exercises = exercises.Where(x => x.ExerciseName.Contains(searchString));
-                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 20));
+                exercises = exercises.Where(x => x.Exercises.ExerciseName.Contains(searchString));
+               return View(exercises.OrderBy(x => x.Exercises.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 20));
             }
            
 
             else
             {
-                return View(db.Workouts.OrderByDescending(x=>x.WorkoutDate).ToList().ToPagedList(pageNumber ?? 1,20));
+                var workouts = db.Workouts.Include(w => w.Exercises);
+                return View(workouts.OrderByDescending(x=>x.WorkoutDate).ToList().ToPagedList(pageNumber ?? 1,20));
             }
         }
 
@@ -53,6 +54,8 @@ namespace Tracker.Controllers.TrackerController
         // GET: Workouts/Create
         public ActionResult Create()
         {
+            ViewBag.WorkoutMasterID = new SelectList(db.WorkoutMasters, "WorkoutMasterID", "WorkoutName");
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ExerciseID", "ExerciseName");
             return View();
         }
 
@@ -61,7 +64,7 @@ namespace Tracker.Controllers.TrackerController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
+        public ActionResult Create([Bind(Include = "WorkoutMasterID,WorkoutID,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
         {
             if (ModelState.IsValid)
             {
@@ -70,6 +73,8 @@ namespace Tracker.Controllers.TrackerController
                 return RedirectToAction("Index");
             }
 
+            ViewBag.WorkoutMasterID = new SelectList(db.WorkoutMasters, "WorkoutMasterID", "WorkoutName", workout.WorkoutMasterID);
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ExerciseID", "ExerciseName", workout.ExerciseID);
             return View(workout);
         }
 
@@ -85,6 +90,8 @@ namespace Tracker.Controllers.TrackerController
             {
                 return HttpNotFound();
             }
+            ViewBag.WorkoutMasterID = new SelectList(db.WorkoutMasters, "WorkoutMasterID", "WorkoutName", workout.WorkoutMasterID);
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ExerciseID", "ExerciseName", workout.ExerciseID);
             return View(workout);
         }
 
@@ -93,7 +100,7 @@ namespace Tracker.Controllers.TrackerController
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "WorkoutID,ExerciseName,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
+        public ActionResult Edit([Bind(Include = "WorkoutMasterID,WorkoutID,WeightLifted,Repetition,Set,WorkoutDate,Duration,ExerciseID")] Workout workout)
         {
             if (ModelState.IsValid)
             {
@@ -101,6 +108,8 @@ namespace Tracker.Controllers.TrackerController
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.WorkoutMasterID = new SelectList(db.WorkoutMasters, "WorkoutMasterID", "WorkoutName", workout.WorkoutMasterID);
+            ViewBag.ExerciseID = new SelectList(db.Exercises, "ExerciseID", "ExerciseName", workout.ExerciseID);
             return View(workout);
         }
 

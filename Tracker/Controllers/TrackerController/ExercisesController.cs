@@ -14,7 +14,7 @@ namespace Tracker.Controllers.TrackerController
 {
     public class ExercisesController : Controller
     {
-        private TrackerContext db = new TrackerContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Exercises
         public ActionResult Index(string searchString, string option, int? pageNumber)
@@ -85,9 +85,10 @@ namespace Tracker.Controllers.TrackerController
 
             else if (ModelState.IsValid)
             {
+                ViewBag.Message = string.Format("Exercise Saved Successfully!");
                 db.Exercises.Add(exercise);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
             }
 
             return View(exercise);

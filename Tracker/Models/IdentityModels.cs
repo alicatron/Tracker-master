@@ -23,6 +23,8 @@ namespace Tracker.Models
         }
     }
 
+   
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -34,5 +36,13 @@ namespace Tracker.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.Profile> Profiles { get; set; }
+
+        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.Exercise> Exercises { get; set; }
+
+        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.Workout> Workouts { get; set; }
+
+        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.WorkoutMaster> WorkoutMasters { get; set; }
     }
 }

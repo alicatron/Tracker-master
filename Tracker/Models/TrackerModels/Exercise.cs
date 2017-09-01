@@ -19,6 +19,6 @@ namespace Tracker.Models.TrackerModels
 
         public BodyPart bodyPart { get; set; }
 
-        public virtual Workout Workout { get; set; }
+        public virtual ICollection<Workout> Workouts { get; set; }
     }
 }

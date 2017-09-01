@@ -189,42 +189,27 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TrackerController\GraphController.cs" />
+    <Compile Include="Controllers\TrackerController\ProfilesController.cs" />
     <Compile Include="Controllers\TrackerController\ExercisesController.cs" />
+    <Compile Include="Controllers\TrackerController\WorkoutMastersController.cs" />
     <Compile Include="Controllers\TrackerController\WorkoutsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201706141244154_InitialCreate.cs" />
-    <Compile Include="Migrations\201706141244154_InitialCreate.Designer.cs">
-      <DependentUpon>201706141244154_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706190812475_error.cs" />
-    <Compile Include="Migrations\201706190812475_error.Designer.cs">
-      <DependentUpon>201706190812475_error.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191224350_role.cs" />
-    <Compile Include="Migrations\201706191224350_role.Designer.cs">
-      <DependentUpon>201706191224350_role.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191257046_duration.cs" />
-    <Compile Include="Migrations\201706191257046_duration.Designer.cs">
-      <DependentUpon>201706191257046_duration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191330042_seed.cs" />
-    <Compile Include="Migrations\201706191330042_seed.Designer.cs">
-      <DependentUpon>201706191330042_seed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201706191556232_workout.cs" />
-    <Compile Include="Migrations\201706191556232_workout.Designer.cs">
-      <DependentUpon>201706191556232_workout.cs</DependentUpon>
+    <Compile Include="Migrations\201709011711420_initial.cs" />
+    <Compile Include="Migrations\201709011711420_initial.Designer.cs">
+      <DependentUpon>201709011711420_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TrackerModels\Profile.cs" />
     <Compile Include="Models\TrackerModels\TrackerContext.cs" />
     <Compile Include="Models\TrackerModels\Exercise.cs" />
     <Compile Include="Models\TrackerModels\Workout.cs" />
+    <Compile Include="Models\TrackerModels\WorkoutMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -310,6 +295,17 @@
     <Content Include="Views\Workouts\Details.cshtml" />
     <Content Include="Views\Workouts\Edit.cshtml" />
     <Content Include="Views\Workouts\Index.cshtml" />
+    <Content Include="Views\Profiles\Create.cshtml" />
+    <Content Include="Views\Profiles\Delete.cshtml" />
+    <Content Include="Views\Profiles\Details.cshtml" />
+    <Content Include="Views\Profiles\Edit.cshtml" />
+    <Content Include="Views\Profiles\Index.cshtml" />
+    <Content Include="Views\WorkoutMasters\Create.cshtml" />
+    <Content Include="Views\WorkoutMasters\Delete.cshtml" />
+    <Content Include="Views\WorkoutMasters\Details.cshtml" />
+    <Content Include="Views\WorkoutMasters\Edit.cshtml" />
+    <Content Include="Views\WorkoutMasters\Index.cshtml" />
+    <Content Include="Views\Graph\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -322,23 +318,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201706141244154_InitialCreate.resx">
-      <DependentUpon>201706141244154_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706190812475_error.resx">
-      <DependentUpon>201706190812475_error.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191224350_role.resx">
-      <DependentUpon>201706191224350_role.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191257046_duration.resx">
-      <DependentUpon>201706191257046_duration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191330042_seed.resx">
-      <DependentUpon>201706191330042_seed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201706191556232_workout.resx">
-      <DependentUpon>201706191556232_workout.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709011711420_initial.resx">
+      <DependentUpon>201709011711420_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

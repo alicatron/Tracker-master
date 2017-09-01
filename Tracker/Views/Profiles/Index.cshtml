@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Tracker.Models.TrackerModels.Profile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.Label("Weight Measurement")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Weight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.Label("Max Weight")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rep)
+        </th>
+        <th>
+            @Html.Label("One Rep Max")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WeightMeasurement)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Weight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxWeight)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rep)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OneRepMax)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProfileID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProfileID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProfileID })
+        </td>
+    </tr>
+}
+
+</table>

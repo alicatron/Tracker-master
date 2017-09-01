@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Create Graph";
+}
+
+<div style="margin-left:7%">
+    Exercise:<input id="xValue" type="text" step="any" placeholder="Enter X-Value">
+    Date:<input id="yValue" type="date" step="any" placeholder="Enter Y-Value">
+    <button id="renderButton" class="btn btn-info" type="submit" value="Create Chart">Create Chart</button>
+</div>
+<div id="chartContainer" style="width:100%; height:360px"></div>
+
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+<script type="text/javascript">
+
+    $(function () {
+        var dps = []; //dataPoints.
+
+        var chart = new CanvasJS.Chart("chartContainer", {
+            title: {
+                text: "Accepting DataPoints from User Input"
+            },
+            exportFileName: "Line Chart",
+            exportEnabled: true,
+            animationEnabled: true,
+            legend: {
+                verticalAlign: "bottom",
+                horizontalAlign: "center"
+            },
+            data: [{
+                type: "line",
+                dataPoints: dps
+            }]
+        });
+
+        function addDataPointsAndRender() {
+            xValue = Number(document.getElementById('xValue').value);
+            yValue = Number(document.getElementById('yValue').value);
+            dps.push({
+                x: xValue,
+                y: yValue
+            });
+            chart.render();
+        }
+
+        var renderButton = document.getElementById('renderButton');
+        renderButton.addEventListener('click', addDataPointsAndRender);
+    });
+
+
+</script>
+
+
+

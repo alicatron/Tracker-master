@@ -3,10 +3,63 @@ namespace Tracker.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.Exercises",
+                c => new
+                    {
+                        ExerciseID = c.Int(nullable: false, identity: true),
+                        ExerciseName = c.String(nullable: false),
+                        bodyPart = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.ExerciseID);
+            
+            CreateTable(
+                "dbo.Workouts",
+                c => new
+                    {
+                        WorkoutID = c.Int(nullable: false, identity: true),
+                        WorkoutMasterID = c.Int(nullable: false),
+                        WeightLifted = c.Double(nullable: false),
+                        Repetition = c.Int(nullable: false),
+                        Set = c.Int(nullable: false),
+                        WorkoutDate = c.DateTime(nullable: false),
+                        Duration = c.Int(nullable: false),
+                        ExerciseID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.WorkoutID)
+                .ForeignKey("dbo.Exercises", t => t.ExerciseID, cascadeDelete: true)
+                .ForeignKey("dbo.WorkoutMasters", t => t.WorkoutMasterID, cascadeDelete: true)
+                .Index(t => t.WorkoutMasterID)
+                .Index(t => t.ExerciseID);
+            
+            CreateTable(
+                "dbo.WorkoutMasters",
+                c => new
+                    {
+                        WorkoutMasterID = c.Int(nullable: false, identity: true),
+                        WorkoutName = c.String(),
+                    })
+                .PrimaryKey(t => t.WorkoutMasterID);
+            
+            CreateTable(
+                "dbo.Profiles",
+                c => new
+                    {
+                        ProfileID = c.Int(nullable: false, identity: true),
+                        Gender = c.Int(nullable: false),
+                        WeightMeasurement = c.Int(nullable: false),
+                        Weight = c.Double(nullable: false),
+                        Height = c.Double(nullable: false),
+                        Age = c.Double(nullable: false),
+                        MaxWeight = c.Double(nullable: false),
+                        Rep = c.Double(nullable: false),
+                    })
+                .PrimaryKey(t => t.ProfileID);
+            
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
@@ -35,6 +88,7 @@ namespace Tracker.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
+                        FullName = c.String(nullable: false, maxLength: 256),
                         Email = c.String(maxLength: 256),
                         EmailConfirmed = c.Boolean(nullable: false),
                         PasswordHash = c.String(),
@@ -83,17 +137,25 @@ namespace Tracker.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Workouts", "WorkoutMasterID", "dbo.WorkoutMasters");
+            DropForeignKey("dbo.Workouts", "ExerciseID", "dbo.Exercises");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Workouts", new[] { "ExerciseID" });
+            DropIndex("dbo.Workouts", new[] { "WorkoutMasterID" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Profiles");
+            DropTable("dbo.WorkoutMasters");
+            DropTable("dbo.Workouts");
+            DropTable("dbo.Exercises");
         }
     }
 }

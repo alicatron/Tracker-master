@@ -19,8 +19,12 @@ namespace Tracker.Models
         {
         }
 
-        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.Exercise> Exercises { get; set; }
+        public DbSet<Tracker.Models.TrackerModels.Exercise> Exercises { get; set; }
 
-        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.Workout> Workouts { get; set; }
+        public DbSet<Tracker.Models.TrackerModels.Workout> Workouts { get; set; }
+
+        public DbSet<Tracker.Models.TrackerModels.Profile> Profiles { get; set; }
+
+        public System.Data.Entity.DbSet<Tracker.Models.TrackerModels.WorkoutMaster> WorkoutMasters { get; set; }
     }
 }

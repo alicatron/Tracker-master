@@ -9,12 +9,19 @@
 <div>
     <hr />
     <dl class="dl-horizontal">
+        
         <dt>
-            @Html.Label("Exercise Name")
+            @Html.DisplayNameFor(model => model.WorkoutMaster.WorkoutName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WorkoutMaster.WorkoutName)
+        </dd>
+        <dt>
+           @Html.DisplayNameFor(model => model.Exercises.ExerciseName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ExerciseName)
+            @Html.DisplayFor(model => model.Exercises.ExerciseName)
         </dd>
 
         <dt>
