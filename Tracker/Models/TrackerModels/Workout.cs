@@ -49,5 +49,7 @@ namespace Tracker.Models.TrackerModels
             }
         }
 
+        public virtual ApplicationUser User { get; set; }
+
     }
 }

@@ -13,5 +13,6 @@ namespace Tracker.Models.TrackerModels
 
         [ForeignKey("WorkoutID")]
         public virtual ICollection<Workout> Workouts { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

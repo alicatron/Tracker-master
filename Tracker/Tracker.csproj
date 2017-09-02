@@ -192,14 +192,15 @@
     <Compile Include="Controllers\TrackerController\GraphController.cs" />
     <Compile Include="Controllers\TrackerController\ProfilesController.cs" />
     <Compile Include="Controllers\TrackerController\ExercisesController.cs" />
+    <Compile Include="Controllers\TrackerController\RoleController.cs" />
     <Compile Include="Controllers\TrackerController\WorkoutMastersController.cs" />
     <Compile Include="Controllers\TrackerController\WorkoutsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709011711420_initial.cs" />
-    <Compile Include="Migrations\201709011711420_initial.Designer.cs">
-      <DependentUpon>201709011711420_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201709021749345_initial.cs" />
+    <Compile Include="Migrations\201709021749345_initial.Designer.cs">
+      <DependentUpon>201709021749345_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\TrackerModels\Profile.cs" />
     <Compile Include="Models\TrackerModels\TrackerContext.cs" />
     <Compile Include="Models\TrackerModels\Exercise.cs" />
+    <Compile Include="Models\TrackerModels\UserRole.cs" />
     <Compile Include="Models\TrackerModels\Workout.cs" />
     <Compile Include="Models\TrackerModels\WorkoutMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -306,6 +308,11 @@
     <Content Include="Views\WorkoutMasters\Edit.cshtml" />
     <Content Include="Views\WorkoutMasters\Index.cshtml" />
     <Content Include="Views\Graph\Create.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Details.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -318,8 +325,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709011711420_initial.resx">
-      <DependentUpon>201709011711420_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709021749345_initial.resx">
+      <DependentUpon>201709021749345_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
