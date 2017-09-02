@@ -18,6 +18,7 @@ namespace Tracker.Models
         public string FullName { get; set; }
         public virtual ICollection<Workout> Workouts { get; set; }
         public virtual ICollection<WorkoutMaster> WorkoutMasters { get; set; }
+        public virtual ICollection<Profile> Profile { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

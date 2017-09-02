@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Tracker.Models;
@@ -13,28 +16,40 @@ namespace Tracker.Controllers
 {
     public class ProfilesController : Controller
     {
-        private TrackerContext db = new TrackerContext();
+        private ApplicationDbContext db = new ApplicationDbContext();
+        private UserManager<ApplicationUser> manager;
+
+        public ProfilesController()
+        {
+            db = new ApplicationDbContext();
+            manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(db));
+        }
 
         // GET: Profiles
         [Authorize]
         public ActionResult Index()
         {
-            
-            return View(db.Profiles.ToList());
+            var currentUser = manager.FindById(User.Identity.GetUserId());
+            return View(db.Profiles.ToList().Where(profiles => profiles.User.Id == currentUser.Id));
         }
 
         // GET: Profiles/Details/5
         [Authorize]
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = await db.Profiles.FindAsync(id);
             if (profile == null)
             {
                 return HttpNotFound();
+            }
+            if (profile.User.Id != currentUser.Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             return View(profile);
         }
@@ -52,12 +67,14 @@ namespace Tracker.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProfileID,Gender,WeightMeasurement,Weight,Height,Age,MaxWeight,Rep")] Profile profile)
+        public async Task<ActionResult> Create([Bind(Include = "ProfileID,Gender,WeightMeasurement,Weight,Height,Age,MaxWeight,Rep")] Profile profile)
         {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {
+                profile.User = currentUser;
                 db.Profiles.Add(profile);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -66,16 +83,21 @@ namespace Tracker.Controllers
 
         // GET: Profiles/Edit/5
         [Authorize]
-        public ActionResult Edit(int? id)
+        public async Task<ActionResult> Edit(int? id)
         {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = await db.Profiles.FindAsync(id);
             if (profile == null)
             {
                 return HttpNotFound();
+            }
+            if (profile.User.Id != currentUser.Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
             }
             return View(profile);
         }
@@ -86,12 +108,13 @@ namespace Tracker.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProfileID,Gender,WeightMeasurement,Weight,Height,Age,MaxWeight,Rep")] Profile profile)
+        public async Task<ActionResult> Edit([Bind(Include = "ProfileID,Gender,WeightMeasurement,Weight,Height,Age,MaxWeight,Rep")] Profile profile)
         {
+
             if (ModelState.IsValid)
             {
                 db.Entry(profile).State = EntityState.Modified;
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(profile);
@@ -99,8 +122,9 @@ namespace Tracker.Controllers
 
         // GET: Profiles/Delete/5
         [Authorize]
-        public ActionResult Delete(int? id)
+        public async Task<ActionResult> Delete(int? id)
         {
+            var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -110,6 +134,10 @@ namespace Tracker.Controllers
             {
                 return HttpNotFound();
             }
+            if (profile.User.Id != currentUser.Id)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
             return View(profile);
         }
 
@@ -117,11 +145,11 @@ namespace Tracker.Controllers
         [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Profile profile = db.Profiles.Find(id);
+            Profile profile = await db.Profiles.FindAsync(id);
             db.Profiles.Remove(profile);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 

@@ -17,7 +17,7 @@ namespace Tracker.Models.TrackerModels
     {
         Male, Female, Unspecified
     }
-    public class Profile : ApplicationUser
+    public class Profile 
     {
         public int ProfileID { get; set; }
         
@@ -48,7 +48,7 @@ namespace Tracker.Models.TrackerModels
             }
         }          
 
-        //public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
                 
     }
 }

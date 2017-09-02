@@ -202,12 +202,15 @@
     <Compile Include="Migrations\201709021749345_initial.Designer.cs">
       <DependentUpon>201709021749345_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709022102158_profile.cs" />
+    <Compile Include="Migrations\201709022102158_profile.Designer.cs">
+      <DependentUpon>201709022102158_profile.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TrackerModels\Profile.cs" />
-    <Compile Include="Models\TrackerModels\TrackerContext.cs" />
     <Compile Include="Models\TrackerModels\Exercise.cs" />
     <Compile Include="Models\TrackerModels\UserRole.cs" />
     <Compile Include="Models\TrackerModels\Workout.cs" />
@@ -327,6 +330,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709021749345_initial.resx">
       <DependentUpon>201709021749345_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709022102158_profile.resx">
+      <DependentUpon>201709022102158_profile.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
