@@ -37,7 +37,7 @@ namespace Tracker.Controllers.TrackerController
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             var workouts = new List<Workout>(db.Workouts.ToList().Where(workout => workout.User.Id == currentUser.Id));
 
-            string connectionString = @"Server=tcp:aliron.database.windows.net,1433;Initial Catalog=trackerDatabase;Persist Security Info=False;User ID=alicatron;Password=Acdsrqj16!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = @"Data Source = Server=tcp:aliron.database.windows.net,1433;Initial Catalog=trackerDatabase;Persist Security Info=False;User ID=alicatron;Password=Acdsrqj16!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {

@@ -13,7 +13,7 @@ namespace Tracker.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201709031321130_initial"; }
+            get { return "201709032348168_initial"; }
         }
         
         string IMigrationMetadata.Source

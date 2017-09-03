@@ -189,7 +189,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TrackerController\ChartController.cs" />
     <Compile Include="Controllers\TrackerController\GraphController.cs" />
     <Compile Include="Controllers\TrackerController\ProfilesController.cs" />
     <Compile Include="Controllers\TrackerController\ExercisesController.cs" />
@@ -199,9 +198,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201709031321130_initial.cs" />
-    <Compile Include="Migrations\201709031321130_initial.Designer.cs">
-      <DependentUpon>201709031321130_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201709032348168_initial.cs" />
+    <Compile Include="Migrations\201709032348168_initial.Designer.cs">
+      <DependentUpon>201709032348168_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -319,7 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Chart\" />
     <Folder Include="Views\Chart\" />
   </ItemGroup>
   <ItemGroup>
@@ -329,8 +327,8 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709031321130_initial.resx">
-      <DependentUpon>201709031321130_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709032348168_initial.resx">
+      <DependentUpon>201709032348168_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
