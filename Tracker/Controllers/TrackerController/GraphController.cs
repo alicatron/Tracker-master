@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Tracker.Models;
 using Tracker.Models.TrackerModels;
@@ -51,7 +52,22 @@ namespace Tracker.Controllers.TrackerController
                     }
                 }
             }
+
             return View(workouts);
         }
+
+       /* public ActionResult CreateChart()
+        {
+            var mychart = new Chart(width: 800, height: 500)
+                    .AddTitle("Weight Lifting Progress")
+                    .AddSeries(chartType: "Line",
+                               xValue: M, xField: "WorkoutDate",
+                               yValues: db, yFields: "TotalLifted")
+                    .Write("png")
+                    .Save("png");
+
+            return View(mychart);
+        }*/
+
     }
 }

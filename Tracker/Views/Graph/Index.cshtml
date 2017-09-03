@@ -1,0 +1,33 @@
+﻿@model Tracker.Models.TrackerModels.Workout
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart Example</title>
+</head>
+<body>
+
+    <div align="right">
+        <form asp-controller="Workouts" asp-action="Index">
+            <p>
+
+                @using (Html.BeginForm("DrawChart", "Graph", FormMethod.Get))
+            {
+                <p>
+                    Search: @Html.TextBox("searchString")
+                    <input type="submit" value="Search" />
+                </p>
+                }
+                </p>
+            </form>
+        </div>
+
+    <img src="@Url.Action("DrawChart")" alt="Chart" />
+
+  
