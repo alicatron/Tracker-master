@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Tracker.Models.TrackerModels.Workout>
+
+@{
+    ViewBag.Title = "DrawChart";
+}
+
+<h2>DrawChart</h2>
+
+
+        @{ 
+            var myChart = new Chart(width: 800, height: 500)
+                .AddTitle("Weight Lifting Progress")
+                .AddSeries(chartType: "Line",
+                           xValue: Model, xField: "WorkoutDate",
+                           yValues: Model, yFields: "TotalLifted")
+                .Write("png")
+                .Save("png", "jpeg");
+        }
+       
+

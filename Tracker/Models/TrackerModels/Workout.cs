@@ -47,6 +47,10 @@ namespace Tracker.Models.TrackerModels
                 double totalLifted = (Repetition * WeightLifted * Set);
                 return totalLifted;
             }
+            set
+            {
+               double totalLifted = value;
+            }
         }
 
         public virtual ApplicationUser User { get; set; }

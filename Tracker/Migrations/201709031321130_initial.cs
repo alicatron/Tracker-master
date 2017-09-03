@@ -29,6 +29,7 @@ namespace Tracker.Migrations
                         WorkoutDate = c.DateTime(nullable: false),
                         Duration = c.Int(nullable: false),
                         ExerciseID = c.Int(nullable: false),
+                        TotalLifted = c.Double(nullable: false),
                         User_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.WorkoutID)
@@ -56,14 +57,6 @@ namespace Tracker.Migrations
                         AccessFailedCount = c.Int(nullable: false),
                         UserName = c.String(nullable: false, maxLength: 256),
                         FullName = c.String(maxLength: 256),
-                        ProfileID = c.Int(),
-                        Gender = c.Int(),
-                        WeightMeasurement = c.Int(),
-                        Weight = c.Double(),
-                        Height = c.Double(),
-                        Age = c.Double(),
-                        MaxWeight = c.Double(),
-                        Rep = c.Double(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
@@ -95,6 +88,24 @@ namespace Tracker.Migrations
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.Users", t => t.IdentityUser_Id)
                 .Index(t => t.IdentityUser_Id);
+            
+            CreateTable(
+                "dbo.Profiles",
+                c => new
+                    {
+                        ProfileID = c.Int(nullable: false, identity: true),
+                        Gender = c.Int(nullable: false),
+                        WeightMeasurement = c.Int(nullable: false),
+                        Weight = c.Double(nullable: false),
+                        Height = c.Double(nullable: false),
+                        Age = c.Double(nullable: false),
+                        MaxWeight = c.Double(nullable: false),
+                        Rep = c.Double(nullable: false),
+                        User_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.ProfileID)
+                .ForeignKey("dbo.Users", t => t.User_Id)
+                .Index(t => t.User_Id);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -144,11 +155,13 @@ namespace Tracker.Migrations
             DropForeignKey("dbo.Workouts", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Workouts", "WorkoutMasterID", "dbo.WorkoutMasters");
             DropForeignKey("dbo.WorkoutMasters", "User_Id", "dbo.Users");
+            DropForeignKey("dbo.Profiles", "User_Id", "dbo.Users");
             DropForeignKey("dbo.Workouts", "ExerciseID", "dbo.Exercises");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.WorkoutMasters", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
+            DropIndex("dbo.Profiles", new[] { "User_Id" });
             DropIndex("dbo.AspNetUserLogins", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserClaims", new[] { "IdentityUser_Id" });
             DropIndex("dbo.Users", "UserNameIndex");
@@ -158,6 +171,7 @@ namespace Tracker.Migrations
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.WorkoutMasters");
             DropTable("dbo.AspNetUserRoles");
+            DropTable("dbo.Profiles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.Users");
