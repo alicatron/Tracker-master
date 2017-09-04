@@ -2,6 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,36 +38,40 @@ namespace Tracker.Controllers.TrackerController
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             var workouts = new List<Workout>(db.Workouts.ToList().Where(workout => workout.User.Id == currentUser.Id));
 
-            string connectionString = @"Data Source = Server=tcp:aliron.database.windows.net,1433;Initial Catalog=trackerDatabase;Persist Security Info=False;User ID=alicatron;Password=Acdsrqj16!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;AttachDbFilename=C:\Users\aliso\Desktop\Project\Tracker-master\Tracker-master\Tracker\App_Data\TrackerConnection.mdf;Initial Catalog=TrackerContext-201709040925188;Integrated Security=True;MultipleActiveResultSets=True";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             {
                 con.Open();
 
-                using (SqlCommand command = new SqlCommand("SELECT WorkoutDate, TotalLifted FROM Workouts WHERE User_Id = 'currentUserId'", con))
+                using (SqlCommand command = new SqlCommand("SELECT WorkoutDate, TotalLifted, ExerciseID, WeightLifted FROM Workouts WHERE User_Id = 'currentUserId' ORDER BY ExerciseID", con))
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         workouts.Add(new Workout { WorkoutDate = reader.GetDateTime(0), TotalLifted = reader.GetDouble(1) });
+                        workouts.Add(new Workout { WorkoutDate = reader.GetDateTime(0), WeightLifted = reader.GetDouble(2) });
+        
                     }
                 }
             }
-
             return View(workouts);
+
+            //ViewBag.Graph = workouts;
+            //return RedirectToAction("CreateChart", new { model = workouts });
         }
 
-       /* public ActionResult CreateChart()
+/*        public ActionResult CreateChart()
         {
-            var mychart = new Chart(width: 800, height: 500)
+            var myChart = new Chart(width: 800, height: 500)
                     .AddTitle("Weight Lifting Progress")
                     .AddSeries(chartType: "Line",
-                               xValue: M, xField: "WorkoutDate",
-                               yValues: db, yFields: "TotalLifted")
+                               xValue: workouts, xField: "WorkoutDate",
+                               yValues: workouts, yFields: "TotalLifted")
                     .Write("png")
                     .Save("png");
 
-            return View(mychart);
+            return View();
         }*/
 
     }

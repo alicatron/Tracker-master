@@ -6,29 +6,25 @@
 
 <h2>DrawChart</h2>
 
-
-<div align="right">
-    <form asp-controller="Workouts" asp-action="Index">
-        <p>
-
-            @using (Html.BeginForm("DrawChart", "Graph", FormMethod.Get))
-            {
-            <p>
-                Search: @Html.TextBox("searchString")
-                <input type="submit" value="Search" />
-            </p>
-            }
-            </p>
-        </form>
     </div>
     <script>
         
-            @{var myChart = new Chart(width: 800, height: 500)
+            @{
+        
+
+                var myChart = new Chart(width: 800, height: 500)
                         .AddTitle("Weight Lifting Progress")
-                        .AddSeries(chartType: "Line",
+                        .AddSeries(chartType: "Bar", name: "Total Lifted",
                                    xValue: Model, xField: "WorkoutDate",
                                    yValues: Model, yFields: "TotalLifted")
+                                   .AddSeries(chartType: "Bar", name: "Weight Lifted",
+                                   xValue: Model, xField: "WorkoutDate",
+                                   yValues: Model, yFields: "WeightLifted")
+                                   .AddLegend(name: "Legend")
+                                   .ToWebImage("jpeg")
                         .Write();
+
+
             }
 
 

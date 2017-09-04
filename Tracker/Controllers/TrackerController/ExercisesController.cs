@@ -26,7 +26,7 @@ namespace Tracker.Controllers.TrackerController
             if (!String.IsNullOrEmpty(searchString) & option == "ExerciseName")
             {
                 exercises = exercises.Where(x => x.ExerciseName.Contains(searchString));
-                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 20));
+                return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1, 50));
             }
             else if (!String.IsNullOrEmpty(searchString) & option == "BodyPart")
             {
@@ -35,7 +35,7 @@ namespace Tracker.Controllers.TrackerController
                     BodyPart bodyValue = (BodyPart)Enum.Parse(typeof(BodyPart), searchString);
                     if (Enum.IsDefined(typeof(BodyPart), bodyValue) | bodyValue.ToString().Contains(","))
                         exercises = exercises.Where(x => x.bodyPart.ToString().ToUpper() == bodyValue.ToString().ToUpper());
-                    return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1,20));
+                    return View(exercises.OrderBy(x => x.ExerciseName).ToList().ToPagedList(pageNumber ?? 1,50));
                 }
                 catch (ArgumentException)
                 {

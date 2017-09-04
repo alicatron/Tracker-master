@@ -6,28 +6,14 @@
 
 <h2>Index</h2>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Chart Example</title>
-</head>
-<body>
 
-    <div align="right">
-        <form asp-controller="Workouts" asp-action="Index">
-            <p>
-
-                @using (Html.BeginForm("DrawChart", "Graph", FormMethod.Get))
-            {
-                <p>
-                    Search: @Html.TextBox("searchString")
-                    <input type="submit" value="Search" />
-                </p>
-                }
-                </p>
-            </form>
-        </div>
 
     <img src="@Url.Action("DrawChart", "GraphController")"/>
+
+    <div class="col-sm-4">
+        <input type="button" onclick="location.href='https://localhost:44339/Graph/DrawChart';" value="Create Chart" />
+
+
+    </div>
 
   

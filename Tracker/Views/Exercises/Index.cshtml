@@ -68,7 +68,9 @@ else
 <div align="center">
     @Html.ActionLink("Add New Exercise", "Create") |
 
-    @Html.ActionLink("Add A Workout", "Create", "WorkoutMasters")
+    @Html.ActionLink("Add A Workout", "Create", "WorkoutMasters") |
+
+    @Html.ActionLink("Back To List", "Index")
 <div/>
 
 @Html.PagedListPager(Model, pageNumer => Url.Action("Index", new { pageNumer }))

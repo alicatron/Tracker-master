@@ -69,6 +69,11 @@ namespace Tracker.Controllers.TrackerController
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "WorkoutMasterID,WorkoutName")] WorkoutMaster workoutMaster)
         {
+            if (db.WorkoutMasters.Any(x => x.WorkoutName == workoutMaster.WorkoutName)) 
+            {
+                ModelState.AddModelError("WorkoutMaster", "Workout Name already exists, please enter a different name");
+                ViewBag.Message = string.Format("Workout Name already exists, please enter a different name");
+            }
             var currentUser = await manager.FindByIdAsync(User.Identity.GetUserId());
             if (ModelState.IsValid)
             {

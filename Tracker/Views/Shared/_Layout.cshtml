@@ -24,13 +24,15 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
-                    <li>@Html.ActionLink("Chart", "DrawChart", "Graph")</li>
+                    
+                    
                     @if (Context.User.Identity.IsAuthenticated)
                     {
                     <li>@Html.ActionLink("Workouts", "Index", "WorkoutMasters")</li>
                     <li>@Html.ActionLink("Exercise List", "Index", "Exercises")</li>
                     <li>@Html.ActionLink("Profile", "Index", "Profiles")</li>
+                    <li>@Html.ActionLink("Chart", "Index", "Graph")</li>
+                    <li>@Html.ActionLink("Role", "Index", "Role")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")

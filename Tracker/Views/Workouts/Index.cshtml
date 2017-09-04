@@ -37,7 +37,7 @@
                 @Html.Label("Exercise Name")
             </th>
             <th>
-                @Html.Label("Weight Lifted (KG)")
+                @Html.Label("Weight Lifted")
             </th>
             <th>
                 @Html.Label("Repetition")
@@ -103,7 +103,8 @@ else
 <br />
 
 <div align="center">
-    @Html.ActionLink("Add New Workout", "Create") |
+    @Html.ActionLink("Add To Workout", "Create") |
+    @Html.ActionLink("Add New Workout Name", "Create", "WorkoutMasters") |
     @Html.ActionLink("Add New Exercise", "Create", "Exercises") |
     @Html.ActionLink("View All Workouts", "Index")
      </div>
